@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>sipariş ver</title>
+    <style> 
+        .form-control{
+            width: 400px;
+            border: 1px solid orange;
+        }
+        label{
+            color: orange;
+        }
+		.başarılı{
+		color:green;
+		display:none;
+		}
+		.başarısız{
+		color:red;
+		display:none;
+		}
+    </style>
+  </head>
+  <body>
+      <div class="header">
+          <div class="container">
+              <div class="row">
+                  <div align="center" class="col-md-12">
+                      <h1>Sipariş Ver</h1>
+                      <form action=""> <!-- bu alanda sipariş vermek için gerekli olan form ekranı kodlandı-->
+                            <div class="form-group">
+                                    <label>Adınızı giriniz</label>
+                                    <input id="ad" type="email" class="form-control" placeholder="Adınız">
+                                    <label>Soy adınız giriniz</label>
+                                    <input id="soyad" type="email" class="form-control" placeholder="Soy adınız">
+                                    <label>Ürün Adı giriniz</label>
+                                    <input id="ürün" type="email" class="form-control" placeholder="ürün adı">
+                            </div>
+                            <label>Ürün rengi seç</label>
+                            <select id="renk" class="form-control">
+                                <option>kırmızı</option>
+                                <option>mavi</option>
+                                <option>siyah</option>
+                                <option>beyaz</option>
+                            </select>
+                            
+                      </form>
+                      <button style="width:70px; margin-top:10px;"  class="btn btn-success ekle">ekle</button>
+                      <p class="başarılı"> <b>tebrikler başarılı bir şekilde sipariş verdiniz</b> </p><!-- bu bölümde başarılı yada başarısız sonuçlar bize bildirim olarak geri yansıyor-->
+                      <p class="başarısız">birşeyler ters gitti <b>alanları kontrol et</b></p>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div align="center" class="siparisler"><!-- bu alan eklenen siparişlerimizin göründüğü alan-->
+		<div class="container">
+			<h1> Siparişlerim</h1>
+          <div class="row">
+              <div class="col-md-3">
+                    <div align="center" class="card">
+                            <img class="card-img-top" src="img/çanta.jpg">
+                            <div class="card-body">
+                              <h5 class="card-title">çanta</h5>
+                              <p class="card-text">berkay akkuş kırmızı renkli bir çanta sipariş etti</p>
+                            </div>
+                    </div>
+              </div>
+          </div>
+		 </div>
+      </div>
+    
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            
+           
+            $(".ekle").click(function(){
+                var ürünad=$("#ürün").val();	//burada değişkenler açılır ve input alanında verdiğimiz değerler bu değişkenlere eklenir
+                var ad=$("#ad").val();
+                var soyad=$("#soyad").val();
+                var renk=$("#renk").val();
+                if(ad!=""&&soyad!=""&&(ürünad=="kolye"||ürünad=="şapka"||ürünad=="çanta")) //burada şartlar belirlenir eğer ürün adını istediğimiz alanda çanta kolye yada şapka yazıyorsa aşağıda tanımlanan kodlar çalışır
+				{
+                $(".başarılı").fadeIn();
+				$(".başarısız").fadeOut();
+                $(".col-md-3:last").after("<div class='col-md-3'> <div align='center' class='card'><img class='card-img-top' src='img/"+ürünad+".jpg'><div class='card-body'><h5 class='card-title'>"+ürünad+"</h5><p class='card-text'>"+ad+" "+soyad+" "+renk+"  renkli bir "+ürünad+" sipariş etti</p></div></div></div>");
+                //yukarıdaki alanda değişkenler yardımıyla yeni bir sipariş eklenir ve siparişlerim alanına dahil edilir
+				}
+                
+				else{ //burada ise ürün adı yada başka bir hata ile karşılaşılırsa bu kodlar çalışır.
+					$(".başarılı").fadeOut();
+					$(".başarısız").fadeIn();
+					$("#ürün").val(" ");
+					$("#ad").val(" ");
+					$("#soyad").val(" ");
+				}
+            });
+        });
+    </script>
+</body>
+</html>
